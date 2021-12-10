@@ -47,7 +47,7 @@ def insert_db_row(new_path, old_path):
         print(f"Error inserting to the database: {e}")
         sys.exit(1)
 
-def move_file(key):
+def copy_file(key):
     file_name = key.split("/")[-1]
     dest_key = f"{S3_OBJECT_DEST_PREFIX}/{file_name}"
     copy_source = {
@@ -87,5 +87,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     files = get_files()
     for file in files:
-        x = threading.Thread(target=move_file, args=(file,))
+        x = threading.Thread(target=copy_file, args=(file,))
         x.start()
