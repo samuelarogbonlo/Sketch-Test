@@ -24,6 +24,28 @@ except Exception as e:
     logging.error(f"Error while connecting to the database: {e}")
     sys.exit(1)
 
+def move_file(key):
+    file_name = key.split("/")[-1]
+    dest_key = f"{S3_OBJECT_DEST_PREFIX}/{file_name}"
+    copy_source = {
+    'Bucket': S3_SOURCE_BUCKET_NAME,
+    'Key': key
+    }
+    try:
+        if not check_exists(dest_key):
+            response = s3.copy_object(
+            Bucket=S3_DEST_BUCKET_NAME,
+            Key=dest_key,
+            CopySource=copy_source
+            )
+            print(f"Successfully copied file {dest_key}")
+            insert_db_row(dest_key, key)
+        else:
+            print(f"The asset {dest_key} already exists")
+    except Exception as e:
+        logging.error(f"Error while copying file: {e}")
+        sys.exit(1)
+
 def get_files():
     files = []
     try:
@@ -41,4 +63,6 @@ if __name__ == "__main__":
         description='This script moves files accross s3 buckets')
     args = parser.parse_args()
     files = get_files()
+    for file in files:
+        move_file(file)
 
