@@ -24,8 +24,21 @@ except Exception as e:
     logging.error(f"Error while connecting to the database: {e}")
     sys.exit(1)
 
+def get_files():
+    files = []
+    try:
+        files = [file["Key"] for file in s3.list_objects(
+        Bucket=S3_SOURCE_BUCKET_NAME
+        )['Contents'] if file["Key"] != "image/"]
+    except Exception as e:
+        logging.error(f"Error while copying file: {e}")
+        sys.exit(1)
+
+    return files
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='This script moves files accross s3 buckets')
     args = parser.parse_args()
+    files = get_files()
 
