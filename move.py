@@ -24,6 +24,28 @@ except Exception as e:
     logging.error(f"Error while connecting to the database: {e}")
     sys.exit(1)
 
+def check_exists(name):
+    try:
+        name_exists = False
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM avatars WHERE path = (%s)", (name,))
+        if len(cur.fetchall()) > 0:
+            name_exists = True
+        conn.commit()
+        return name_exists
+    except Exception as e:
+        logging.error(f"Error inserting to the database: {e}")
+        sys.exit(1)
+
+def insert_db_row(new_path, old_path):
+    try:
+        cur = conn.cursor()
+        cur.execute("UPDATE avatars SET path = (%s) WHERE path = (%s)", (new_path, old_path))
+        conn.commit()
+    except Exception as e:
+        print(f"Error inserting to the database: {e}")
+        sys.exit(1)
+
 def move_file(key):
     file_name = key.split("/")[-1]
     dest_key = f"{S3_OBJECT_DEST_PREFIX}/{file_name}"
