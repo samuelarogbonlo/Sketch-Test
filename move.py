@@ -6,6 +6,7 @@ import argparse
 import psycopg2
 import os
 import sys
+import threading
 
 # Env variables for database and S3 configuration
 DB_CONN_STRING = os.getenv(
@@ -86,5 +87,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     files = get_files()
     for file in files:
-        move_file(file)
-
+        x = threading.Thread(target=move_file, args=(file,))
+        x.start()
