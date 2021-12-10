@@ -18,7 +18,7 @@ load_dotenv()
 # to read the source bucket and write to the destination bucket
 # -----------------------------------
 DB_CONN_STRING = os.getenv(
-    'DB_CONN_STRING', 'postgres://username:userpassword@127.0.0.1/proddatabase')
+    'DB_CONN_STRING', 'postgres://username:password@127.0.0.1/proddatabase')
 S3_SOURCE_BUCKET_NAME = os.getenv('S3_SOURCE_BUCKET_NAME', 'legacy-s3')
 S3_DEST_BUCKET_NAME = os.getenv('S3_DEST_BUCKET_NAME', 'production-s3')
 S3_OBJECT_DEST_PREFIX = os.getenv('S3_OBJECT_DEST_PREFIX', 'avatar')
@@ -79,6 +79,7 @@ def copy_file(key):
         'Key': key
     }
     try:
+        # Check if file exists so we dont 
         if not check_exists(dest_key):
             response = s3.copy_object(
                 Bucket=S3_DEST_BUCKET_NAME,

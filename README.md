@@ -1,8 +1,8 @@
-# Python script to move files between S3 buckets
+# Python Script to Move Files Between S3 Buckets
 
 This script moves legacy assets to a production S3 bucket
 
-## How to run
+## How to Run
 
 - Clone the github repository by running `git clone <repo_url>` in your terminal
 - Navigate to the folder containing the `move.py` file
@@ -13,3 +13,5 @@ This script moves legacy assets to a production S3 bucket
 ## Development setup
 
 Resources used in this script were created manually including S3 buckets and PostgreSQL databases. However, in a production environment, it is strongly advised to follow infrastructure as code best practices.
+
+## Performance and Scalability
