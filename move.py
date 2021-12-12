@@ -27,10 +27,12 @@ S3_OBJECT_DEST_PREFIX = os.getenv('S3_OBJECT_DEST_PREFIX', 'avatar')
 s3 = boto3.client("s3")
 
 # -----------------------------------
-# NB: The database user needs to have read and write permissions in the database.
+# NB: The database user needs to have 
+# “privileges on all tables in the public schema” 
+# and “privileges for all sequences in the public schema”.
 # -----------------------------------
 
-# Create database connection
+# Creating database connection
 try:
     conn = psycopg2.connect(DB_CONN_STRING)
 except Exception as e:
@@ -69,7 +71,8 @@ def update_db_row(new_path, old_path):
         sys.exit(1)
 
 # -----------------------------------
-# This function copies files between S3 buckets (legacy and production).
+# This function copies files between 
+# S3 buckets (legacy-s3 and production-s3).
 # -----------------------------------
 def copy_file(key):
     file_name = key.split("/")[-1]
@@ -78,8 +81,13 @@ def copy_file(key):
         'Bucket': S3_SOURCE_BUCKET_NAME,
         'Key': key
     }
-    try:
-        # Check if file exists so we dont 
+    try:# -----------------------------------
+        # This checks if PNG image path exists in database.
+        # If it does not exist, the PNG image is copied from 
+        # legacy-s3 to production-s3 buckets respectively.
+        # If it exists in databasethe PNG file skipped and 
+        # not updated in database.
+        # -----------------------------------
         if not check_exists(dest_key):
             response = s3.copy_object(
                 Bucket=S3_DEST_BUCKET_NAME,
@@ -108,12 +116,15 @@ def get_files():
         sys.exit(1)
     return files
 
-
+# ----------------------------------- 
+# This runs the code only defined in the if block. 
+# -----------------------------------
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description='This script moves files accross s3 buckets')
+        description='''This script copies PNG images across s3 buckets, 
+                        renames the key in the destination bucket and updates path in database''')
     args = parser.parse_args()
     files = get_files()
     for file in files:
-        x = threading.Thread(target=copy_file, args=(file,))
+        x = threading.Thread(target=copy_file, args=(file,)) # Creates a thread for each file copied
         x.start()
