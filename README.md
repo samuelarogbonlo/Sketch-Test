@@ -12,6 +12,8 @@ This script moves legacy assets to a production S3 bucket
 
 ## Development setup
 
-Resources used in this script were created manually including S3 buckets and PostgreSQL databases. However, in a production environment, it is strongly advised to follow infrastructure as code best practices.
+Resources used in this script were created manually including S3 buckets and PostgreSQL databases. However, in a production environment, it is strongly advised to follow infrastructure as code best practices. Two S3 buckets were created on the AWS console and a PostgreSQL database called `proddatabase` was created. This database has a teble called `avatars` with a column called `path`
 
 ## Performance and Scalability
+
+When testing the app initially, I discovered that the original synchronous solution I had wasn't going to scale. It waited for each file to get copied before moving to the next one. I decided to move to an asynchronous solution by running each copy operation on its own thread. This resulted in a tremendous improvement in performance.
