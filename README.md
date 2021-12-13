@@ -10,7 +10,7 @@ This script copies PNG images from a source bucket to a destination bucket. It r
 **NB:** Where `image` is the old key prefix, `avatar` is the new key prefix and `avatar-xx.png` is the PNG file name or object name. 
 
 ## Core Structure
-    Mina Node Deployment
+    Sketch Script
       │   ├── move.py   
       │   │
       │   └── requirements.txt
