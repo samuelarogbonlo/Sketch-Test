@@ -1,7 +1,9 @@
 # Sketch Task
 
 # Python Script to Move Files Between S3 Buckets
-Opinionated project architecture and scripts for moving all images from the `legacy-s3` to the `production-s3` and updates their paths in the database
+Opinionated project architecture and scripts for moving all images from the `legacy-s3` to the `production-s3` and updates their paths in the database. 
+
+The architecture of operation can be found via the folder directed [here](https://github.com/samuelarogbonlo/sre-test/blob/master/ModelOfOperation.png)
 
 ## Operation Functionality
 This script copies PNG images from a source bucket to a destination bucket. It renames the object's (PNG images) key prefix in the destination bucket and adds the PNG images in the destination bucket, and finally it updates a database containing a path (key prefix and object name i.e, PNG image file name) to the PNG images in the source bucket, to the new path (new key prefix and object name i.e, PNG image file name) of the PNG  images in the destination bucket. Example: `image/avatar-xx.png` is the old path in database and `avatar/avatar-xx.png` is the new updated path in database after copy operation. 
