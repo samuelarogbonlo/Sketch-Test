@@ -1,6 +1,6 @@
 # Python Script to Move Files Between S3 Buckets
 
-This script copies PNG images from a source bucket to a destination bucket. It renames the object key prefix in the destination bucket and adds the PNG images in the destination bucket, and finally it updates a database containing a path(key prefix and object i.e, PNG image file) to the PNG images in the source bucket, to the new path(new key prefix and object i.e, PNG image file) of the PNG  images in the destination bucket. Th
+This script copies PNG images from a source bucket to a destination bucket. It renames the object key prefix in the destination bucket and adds the PNG images in the destination bucket, and finally it updates a database containing a path (key prefix and object i.e, PNG image file name) to the PNG images in the source bucket, to the new path (new key prefix and object i.e, PNG image file name) of the PNG  images in the destination bucket. Example `image/avatar-xx.png` for old path in database and `avatar/avatar-xx.png` to new path in database. Where `image` is the old key prefix, `avatar` is the new key prefix and `avatar-xx.png` is the PNG file name. 
 
 ## How to Run
 
@@ -16,4 +16,4 @@ Resources used in this script were created manually including S3 buckets and Pos
 
 ## Performance and Scalability
 
-When testing the app initially, It was discovered that the original synchronous solution provided wasn't going to be easy to scale. It waited for each file to get copied before moving to the next one. I decided to move to an asynchronous solution by running each copy operation on its own thread. This resulted in a tremendous improvement in performance.
+When testing the program initially, It was discovered that the original synchronous solution implemented was not going to be easy to scale. It waited for each PNG file to get copied before moving to the next one. An asynchronous approach was then implemented, which runs each copy operation on its own thread. This resulted in a tremendous improvement in performance.
