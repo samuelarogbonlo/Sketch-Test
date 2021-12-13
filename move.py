@@ -57,8 +57,8 @@ def check_exists(name):
         sys.exit(1)
 
 # -----------------------------------
-# This updates the legacy path to the new path which is the
-# production path.
+# This updates the legacy-s3 path to the new path which is the
+# production-s3 path in the database.
 # -----------------------------------
 def update_db_row(new_path, old_path):
     try:
@@ -72,7 +72,8 @@ def update_db_row(new_path, old_path):
 
 # -----------------------------------
 # This function copies files between 
-# S3 buckets (legacy-s3 and production-s3).
+# S3 buckets ("legacy-s3/source bucket" 
+# and "production-s3/destination bucket").
 # -----------------------------------
 def copy_file(key):
     file_name = key.split("/")[-1]
@@ -84,8 +85,9 @@ def copy_file(key):
     try:# -----------------------------------
         # This checks if PNG image path exists in database.
         # If it does not exist, the PNG image is copied from 
-        # legacy-s3 to production-s3 buckets respectively.
-        # If it exists in databasethe PNG file skipped and 
+        # "legacy-s3/source bucket" to "production-s3/destination bucket" 
+        # buckets respectively.
+        # If it exists in database the PNG file is skipped and 
         # not updated in database.
         # -----------------------------------
         if not check_exists(dest_key):
@@ -103,7 +105,8 @@ def copy_file(key):
         sys.exit(1)
 
 # -----------------------------------
-# This function gets all the files that exists in the legacy bucket
+# This function gets all the files that exists 
+# in the "legacy-s3/source bucket" bucket.
 # -----------------------------------
 def get_files():
     files = []
