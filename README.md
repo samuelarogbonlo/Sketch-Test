@@ -1,6 +1,6 @@
 # Python Script to Move Files Between S3 Buckets
 
-This script copies PNG images from a source bucket to a destination bucket. It renames the object key prefix in the destination bucket and adds the PNG images in the destination bucket, and finally it updates a database containing a path (key prefix and object i.e, PNG image file name) to the PNG images in the source bucket, to the new path (new key prefix and object i.e, PNG image file name) of the PNG  images in the destination bucket. Example `image/avatar-xx.png` for old path in database and `avatar/avatar-xx.png` to new path in database. Where `image` is the old key prefix, `avatar` is the new key prefix and `avatar-xx.png` is the PNG file name. 
+This script copies PNG images from a source bucket to a destination bucket. It renames the object's (PNG images) key prefix in the destination bucket and adds the PNG images in the destination bucket, and finally it updates a database containing a path (key prefix and object i.e, PNG image file name) to the PNG images in the source bucket, to the new path (new key prefix and object i.e, PNG image file name) of the PNG  images in the destination bucket. Example `image/avatar-xx.png` for old path in database and `avatar/avatar-xx.png` to new path in database. Where `image` is the old key prefix, `avatar` is the new key prefix and `avatar-xx.png` is the PNG file name. 
 
 ## How to Run
 
