@@ -3,6 +3,11 @@
 This script copies PNG images from a source bucket to a destination bucket. It renames the object's (PNG images) key prefix in the destination bucket and adds the PNG images in the destination bucket, and finally it updates a database containing a path (key prefix and object name i.e, PNG image file name) to the PNG images in the source bucket, to the new path (new key prefix and object name i.e, PNG image file name) of the PNG  images in the destination bucket. Example: `image/avatar-xx.png` is the old path in database and `avatar/avatar-xx.png` is the new updated path in database after copy operation. 
 **NB:** Where `image` is the old key prefix, `avatar` is the new key prefix and `avatar-xx.png` is the PNG file name or object name. 
 
+### Model of Operation of move.py Script
+Below is a diagram describing the operation of the `move.py` script contained in this repository.
+![Model of Operation](/sre-test/blob/master/ModelOfOperation.png)
+
+
 ## How to Run
 
 - Clone the github repository by running `git clone <repo_url>` in your terminal
