@@ -50,7 +50,7 @@ When testing the program initially, It was discovered that the original synchron
 - Start learning by looking at sample codes on GitHub: [#LearnByExamples](https://github.com/topics/learn-by-examples)
 
 ## Hire me
-Looking for an Infrastructure engineer to build your next infrastruture in O(1) Labs and work remotely? Get in touch: [sbayo971@gmail.com](mailto:sbayo971@gmail.com)
+Looking for a Site Reliablity Engineer to build your next infrastruture in Sketch and work remotely? Get in touch: [sbayo971@gmail.com](mailto:sbayo971@gmail.com)
 
 ## License
 
