@@ -1,4 +1,9 @@
 # Sketch Task
+Below is a sketched model of operation of the `move.py` script contained in this repository. 
+- The **Copy Operation** section shown in the diagram below shows how each copy operation (from legacy-s3/source bucket to production-s3/destination bucket) is threaded and performed asynchronously. NB: #n in diagram simply denotes any number of copy operation running on it's own thread.
+- The **Update Operation** section in the diagram shows a flow chart describing how each old path (path of PNG files initially retrieved from `legacy-s3/source bucket`) in the database is updated to the new path (path of PNG files finally retrieved from `production-s3/destination bucket`) after copy operation. If by chance the copy operation gets interrupted, once the `move.py` script is re-run, it checks the database and the key of the asset (PNG image) in the production-s3/destination bucket to confirm if the asset (PNG image) has been successfully copied. If it has not been successfully copied and updated in the database, the script will re-run, check and confirm asset existence, and start the operation from the last copied file in the legacy-s3/source bucket.  
+
+![Model of Operation](https://github.com/samuelarogbonlo/sre-test/blob/master/ModelOfOperation.png)
 
 # Python Script to Move Files Between S3 Buckets
 Opinionated project architecture and scripts for moving all images from the `legacy-s3` to the `production-s3` and updates their paths in the database. 
