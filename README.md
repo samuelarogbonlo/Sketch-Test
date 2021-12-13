@@ -5,7 +5,7 @@ This script copies PNG images from a source bucket to a destination bucket. It r
 
 ### Model of Operation of move.py Script
 Below is a diagram describing the operation of the `move.py` script contained in this repository.
-![Model of Operation](/sre-test/blob/master/ModelOfOperation.png)
+![Model of Operation](/samuelarogbonlo/sre-test/blob/master/ModelOfOperation.png)
 
 
 ## How to Run
