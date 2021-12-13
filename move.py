@@ -14,8 +14,8 @@ load_dotenv()
 
 # Env variables for database and S3 configuration
 # -----------------------------------
-# S3 buckets need to allow the IAM user access 
-# to read the source bucket and write to the destination bucket
+# NB: IAM user requires S3FullAccess permissions in order
+# to perform read and write operations on S3 buckets.
 # -----------------------------------
 DB_CONN_STRING = os.getenv(
     'DB_CONN_STRING', 'postgres://username:password@127.0.0.1/proddatabase')
